@@ -29,7 +29,7 @@ function logInput(e) {
             answer = operate(firstNum,op,secNum);
             secNum = '';
         }
-        screen.textContent = answer;
+        screen.textContent = Math.floor(answer * 100) / 100;
     }
     // Changes the current number neg or positive
     else if (this.id === '+/-') {
@@ -38,6 +38,16 @@ function logInput(e) {
             screen.textContent = secNum;
         } else {
             firstNum *= (-1);
+            screen.textContent = firstNum;
+        }
+    }
+    // Decimal point
+    else if (this.id === '.') {
+        if (firstNum != '' && secNum != '') {
+            secNum += this.id; 
+            screen.textContent = secNum;
+        } else {
+            firstNum += this.id;
             screen.textContent = firstNum;
         }
     }
@@ -81,8 +91,8 @@ function clear() {
 
 // Takes the operator to call the right calculation function and sends numbers
 function operate(x,op,y) {
-    x = parseInt(x);
-    y = parseInt(y);
+    x = parseFloat(x);
+    y = parseFloat(y);
     if(op === '+') {
         return add(x,y);
     }
